@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+{% block content %}
+
+<h1>Categroies</h1>
+
+
+<div>
+{% for catlog in catlogs %}
+  <a href = "{{url_for('showItem', catlog_id = catlog.id)}}">
+    <h3>{{catlog.name}}</h3>
+  </a>
+</div>
+{% endfor %}
+{% endblock %}

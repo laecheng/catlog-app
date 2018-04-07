@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div>
+	<h1>Edit {{editItem.name}}</h1>
+</div>
+<div>
+	<form action="{{ url_for('editItem', catlog_id = catlog.id, item_id=editItem.id)}}" method = "post">
+    <label for="name">Name:</label>
+    <input type ="text"  maxlength="100" name="name" value={{editItem.name}}>
+    <label for="description">Description:</label>
+    <input type ="text"  maxlength="100" name="description" value={{editItem.description}}>
+    <button type="submit" id="submit">Submit</button>
+	</form>
+	</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+
+<h1>{{ item.name }}</h1>
+
+
+<div>
+
+  <h3>Description:</h3>
+  <div>
+    <p> {{item.description}}</p>
+  </div>
+  <a href = "{{url_for('editItem', catlog_id=catlog.id, item_id = item.id)}}">
+    <h3>Edit</h3>
+  </a>
+  <a href = "{{url_for('deleteItem', catlog_id=catlog.id, item_id = item.id)}}">
+    <h3>Delete</h3>
+  </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+
+<h1>Catlog: {{ catlog.name }}</h1>
+
+
+<div>
+  <a href="{{url_for('newItem', catlog_id = catlog.id)}}">
+    <button>Create New Item</button>
+  </a>
+</div>
+
+<div>
+  <h1>Items:</h1>
+{% for item in items %}
+  <a href = "{{url_for('showItemInfo', catlog_id=catlog.id, item_id = item.id)}}">
+  <h4>{{item.name}}</h4></a>
+
+</div>
+{% endfor %}
+{% endblock %}

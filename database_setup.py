@@ -14,8 +14,8 @@ class User(Base):
     email = Column(String(250), nullable=False)
 
 
-class Category(Base):
-    __tablename__ = 'category'
+class Catlog(Base):
+    __tablename__ = 'catlog'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
@@ -23,14 +23,14 @@ class Category(Base):
     user = relationship(User)
 
 
-class CategoryItem(Base):
-    __tablename__ = 'category_item'
+class CatlogItem(Base):
+    __tablename__ = 'catlog_item'
 
     name = Column(String(80), nullable=False)
     id = Column(Integer, primary_key=True)
     description = Column(String(250))
-    category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship(Category)
+    catlog_id = Column(Integer, ForeignKey('catlog.id'))
+    catlog = relationship(Catlog)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
