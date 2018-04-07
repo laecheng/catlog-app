@@ -1,8 +1,28 @@
 {% extends "main.html" %}
 {% block content %}
 
-<h1>Categroies</h1>
+{% if not login_session['username'] %}
+    <button><a href="{{ url_for('showLogin') }}">Log in</a></button>
+  {% else %}
+    <button><a href="{{ url_for('gdisconnect') }}">Log out</a></button>
+  {% endif %}
 
+  <div class = 'flash'>
+  		      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+          <ul>
+          {% for message in messages %}
+              <li> <strong> {{ message }} </strong> </li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+      {% endwith %}
+
+  </div>
+
+
+<h1>Categroies</h1>
 
 <div>
 {% for catlog in catlogs %}

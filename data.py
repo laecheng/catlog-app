@@ -18,21 +18,38 @@ DBSession = sessionmaker(bind=engine)
 # session.rollback()
 session = DBSession()
 
-
-# Create dummy user
-user1 = User(name="Robo Barista", email="tinnyTim@udacity.com")
-session.add(user1)
-session.commit()
-
-# Menu for UrbanBurger
-catlog1 = Catlog(user_id=1, name="baseball")
-
+catlog1 = Catlog(name="Soccer")
 session.add(catlog1)
 session.commit()
 
-catlogItem1 = CatlogItem(user_id=1, name="super bat",
-                         description="really nice bat to have",
-                         catlog=catlog1)
+catlog2 = Catlog(name="Basketball")
+session.add(catlog2)
+session.commit()
 
-session.add(catlogItem1)
+catlog3 = Catlog(name="Baseball")
+session.add(catlog3)
+session.commit()
+
+catlog4 = Catlog(name="Frisbee")
+session.add(catlog4)
+session.commit()
+
+catlog5 = Catlog(name="Snowboarding")
+session.add(catlog5)
+session.commit()
+
+catlog6 = Catlog(name="Rock Climbing")
+session.add(catlog6)
+session.commit()
+
+catlog7 = Catlog(name="Foosball")
+session.add(catlog7)
+session.commit()
+
+catlog8 = Catlog(name="Skating")
+session.add(catlog8)
+session.commit()
+
+catlog9 = Catlog(name="Hockey")
+session.add(catlog9)
 session.commit()
