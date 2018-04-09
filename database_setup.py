@@ -22,6 +22,14 @@ class Catlog(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'name': self.name,
+            'id': self.id,
+        }
+
 
 class CatlogItem(Base):
     __tablename__ = 'catlog_item'
@@ -33,6 +41,15 @@ class CatlogItem(Base):
     catlog = relationship(Catlog)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'name': self.name,
+            'description': self.description,
+            'id': self.id,
+        }
 
 
 engine = create_engine('sqlite:///catlog.db')

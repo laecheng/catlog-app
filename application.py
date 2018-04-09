@@ -248,10 +248,8 @@ def editItem(catlog_id, item_id):
         flash('user must be login to modify the item')
         return redirect(url_for('showCatlogs'))
     if editItem.user_id != login_session['user_id']:
-        print "editItem.user_id: " + str(editItem.user_id)
-        print "login_session['user_id']: " + str(login_session['user_id'])
-        flash('You are not authorized to edit this restaurant' +
-              'Please create your own restaurant in order to edit')
+        flash('You are not authorized to edit this item' +
+              'Please create your own item in order to edit')
         return redirect(url_for('showItem', catlog_id=catlog_id))
 
     if request.method == 'POST':
@@ -285,6 +283,10 @@ def deleteItem(catlog_id, item_id):
         itemToDelete = session.query(CatlogItem).filter_by(id=item_id).one()
     except:
         return redirect(url_for('showItem', catlog_id=catlog_id))
+    if itemToDelete.user_id != login_session['user_id']:
+        flash('You are not authorized to delete this item' +
+              'Please create your own item first')
+        return redirect(url_for('showItem', catlog_id=catlog_id))
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
@@ -292,6 +294,26 @@ def deleteItem(catlog_id, item_id):
     else:
         return render_template('deleteItem.html',
                                item=itemToDelete, catlog=catlog)
+
+
+# JSON APIS to view the catlog and item information
+@app.route('/catlog/JSON')
+def catlogJSON():
+    catlogs = session.query(Catlog).all()
+    return jsonify(catlogs=[r.serialize for r in catlogs])
+
+
+@app.route('/catlog/<int:catlog_id>/item/JSON')
+def catlogItemJSON(catlog_id):
+    items = session.query(CatlogItem).filter_by(
+        catlog_id=catlog_id).all()
+    return jsonify(items=[i.serialize for i in items])
+
+
+@app.route('/catlog/<int:catlog_id>/<int:item_id>/JSON')
+def itemJSON(catlog_id, item_id):
+    item = session.query(CatlogItem).filter_by(id=item_id).one()
+    return jsonify(item=item.serialize)
 
 
 if __name__ == '__main__':
