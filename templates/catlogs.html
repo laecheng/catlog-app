@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
 
+
 {% if not login_session['username'] %}
     <button><a href="{{ url_for('showLogin') }}">Log in</a></button>
   {% else %}
